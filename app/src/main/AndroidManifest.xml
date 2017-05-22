@@ -20,7 +20,8 @@
         <activity
             android:name=".TabViewExample"
             android:label="@string/title_activity_tab_view_example"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PersonEntry2"></activity>
     </application>
 
 </manifest>
