@@ -9,6 +9,7 @@
     tools:context="com.santam.nanosofttest.TabViewExample$PlaceholderFragment">
 
     <TabHost
+        android:id="@+id/tabHost"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
