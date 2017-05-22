@@ -69,7 +69,7 @@
 
     <Button
         android:id="@+id/btnTabView"
-        android:layout_width="match_parent"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="20dp"

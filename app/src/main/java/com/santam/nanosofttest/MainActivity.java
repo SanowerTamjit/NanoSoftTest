@@ -1,5 +1,6 @@
 package com.santam.nanosofttest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,22 +36,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         if (v == mEntry){
-
+            startActivity(new Intent(MainActivity.this, PersonEntry.class));
         }
         else if (v == mDataView){
-
+            startActivity(new Intent(MainActivity.this, PersonData.class));
         }
         else if (v == mPhonebook){
-
+            startActivity(new Intent(MainActivity.this, PhoneBook.class));
         }
         else if (v == mLocation){
+            startActivity(new Intent(MainActivity.this, LocationByUser.class));
 
         }
         else if (v == mWebview){
 
         }
         else if (v == mTabView){
-
+            startActivity(new Intent(MainActivity.this, TabLayout2.class));
         }
 
     }

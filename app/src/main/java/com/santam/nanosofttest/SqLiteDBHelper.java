@@ -28,7 +28,8 @@ public class SqLiteDBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE "+TABLE_NAME +" ("+COL1+" INTEGER PRIMARY KEY AUTOINCREMENT, " + COL2 +" TEXT)";
+        String createTable = "CREATE TABLE "+TABLE_NAME +" ("+COL1+" TEXT PRIMARY KEY, " + COL2 +" TEXT, " + COL3 + " INTEGER " +
+                ", " + COL4 + " TEXT , " + COL5 + " TEXT , " + COL6 + " TEXT)";
         db.execSQL(createTable);
     }
 
@@ -37,11 +38,16 @@ public class SqLiteDBHelper extends SQLiteOpenHelper{
         String createTable = "DROP IF TABLE EXISTS "+TABLE_NAME ;
         db.execSQL(createTable);
     }
-    public boolean AddData (String name){
+    public boolean AddData (String id, String name, int Age, String dob, String latitude, String longitude){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(COL1,id);
         contentValues.put(COL2,name);
-        Log.d(TAG,"Add Data Adding " + name + " to "+ TABLE_NAME);
+        contentValues.put(COL3,Age);
+        contentValues.put(COL4,dob);
+        contentValues.put(COL5,latitude);
+        contentValues.put(COL6,longitude);
+        Log.d(TAG,"Data Adding " + name + " to "+ TABLE_NAME);
         long result = db.insert(TABLE_NAME, null, contentValues);
         if (result == -1)
             return false;
@@ -64,24 +70,20 @@ public class SqLiteDBHelper extends SQLiteOpenHelper{
         return data;
     }
 
-
-    public void updateName(String newName, int id, String oldName){
+    public Cursor viewDataByID(String id , String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
-                " = '" + newName + "' WHERE " + COL1 + " = '" + id + "'" +
-                " AND " + COL2 + " = '" + oldName + "'";
-        Log.d(TAG, "updateName: query: " + query);
-        Log.d(TAG, "updateName: Setting name to " + newName);
-        db.execSQL(query);
+        String query = "SELECT * FROM " +TABLE_NAME+ " WHERE " +COL1+" = '"+id+"' AND " + COL2 + " = '"+name+"' ";
+        Cursor data2 = db.rawQuery(query, null);
+        Log.d(TAG, "Data View: query: " + query);
+
+        return data2;
     }
-
-    public void deleteName(int id, String name){
+    public Cursor forGetLocation(String id){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
-                + COL1 + " = '" + id + "'" +
-                " AND " + COL2 + " = '" + name + "'";
-        Log.d(TAG, "deleteName: query: " + query);
-        Log.d(TAG, "deleteName: Deleting " + name + " from database.");
-        db.execSQL(query);
+        String query = "SELECT "+COL5+","+COL6+" FROM " +TABLE_NAME+ " WHERE " +COL1+" = '"+id+"' ";
+        Cursor data2 = db.rawQuery(query, null);
+        Log.d(TAG, "Data View: query: " + query);
+
+        return data2;
     }
 }
